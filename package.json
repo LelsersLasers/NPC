@@ -1,0 +1,32 @@
+{
+  "name": "npc",
+  "version": "0.0.1",
+  "description": "Discord bot using Discord.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LelsersLasers/NPC.git"
+  },
+  "keywords": [
+    "discord",
+    "js",
+    "javascript",
+    "bot"
+  ],
+  "author": "LelsersLasers",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LelsersLasers/NPC/issues"
+  },
+  "homepage": "https://github.com/LelsersLasers/NPC#readme",
+  "dependencies": {
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0"
+  }
+}
