@@ -7,14 +7,14 @@ const helpString = `Available commands:
 /remind - Reminds you of something (format: /remind [time] [message])`;
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName("help")
-		.setDescription("Tests to see if NPC is connected!"),
-	async execute(interaction) {
-		console.log("\n'/help' command executed\n");
-		await interaction.reply({
-			content: helpString,
-			ephemeral: true,
-		});
-	},
+  data: new SlashCommandBuilder()
+    .setName("help")
+    .setDescription("Tests to see if NPC is connected!"),
+  async execute(interaction) {
+    console.log("\n'/help' command executed\n");
+    await interaction.reply({
+      content: helpString,
+      ephemeral: true,
+    });
+  },
 };
