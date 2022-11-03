@@ -28,7 +28,8 @@ module.exports = {
 		const intervalMs = Math.round(interval * 1000);
 		const message = interaction.options.getString("message") ?? "";
 
-		console.log({ user, times, interval, message }, "\n");
+		const username = user.username;
+		console.log({ username, times, interval, message }, "\n");
 
 		let messageString = user.toString();
 		if (message != "") {

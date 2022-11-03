@@ -3,7 +3,7 @@ const { Events } = require("discord.js");
 module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
-		console.log("\nTIME:", new Date(), "\nInteraction found from", interaction.user.username);
+		console.log("\n\nTIME:", new Date(), "\nInteraction found from", interaction.user.username);
 
 		if (!interaction.isChatInputCommand()) return;
 
