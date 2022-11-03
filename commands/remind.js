@@ -25,29 +25,50 @@ module.exports = {
 	async execute(interaction) {
 		console.log("\n'/remind' command executed");
 
-		await interaction.deferReply();
-
 		const time = interaction.options.getNumber("time");
 		const unitModifier = interaction.options.getInteger("unit");
-		const message = interaction.options.getString("message") ?? "You asked me to remind you of something!";
+
+		const defaultMessage = "You asked me to remind you of something!";
+		const message = interaction.options.getString("message") ?? defaultMessage;
 
 		const delay = Math.round(unitModifier * time * 1000);
 
 		console.log({ time, unitModifier, message, delay }, "\n");
 
-		const unitString = {
+		const unitStrings = {
 			1: "seconds",
 			60: "minutes",
 			3600: "hours",
 			86400: "days",
 			604800: "weeks",
-		}[unitModifier];
-		const successMessage = "Reminder set for " + time + " " + unitString + " from now:\n" + message;
-		await interaction.editReply(successMessage);
+		};
+		let successMessage = "Reminder set for " + time + " " + unitStrings[unitModifier] + " from now";
+		if (message == defaultMessage) {
+			successMessage += ".";
+		} else {
+			successMessage += ":\n*" + message + "*";
+		}
+		await interaction.reply(successMessage);
 
+
+		const fromDate = new Date();
 
 		async function reminder() {
-			await interaction.editReply("\n**REMINDER:**\n" + message);
+
+			const nowDate = new Date();
+
+			let timeString = fromDate.toTimeString().substring(0, 5);
+			if (timeString.startsWith("0")) {
+				timeString = timeString.substring(1);
+			}
+
+			const dateString = fromDate.toDateString();
+			const nowDateString = nowDate.toDateString();
+			if (dateString != nowDateString) {
+				timeString += " on " + dateString.substring(0, 10);
+			}
+
+			await interaction.channel.send("**REMINDER** (from " + timeString + "):\n*" + message + "*");
 		}
 
 		setTimeout(() => reminder(), delay);
