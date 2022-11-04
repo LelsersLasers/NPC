@@ -76,9 +76,8 @@ module.exports = {
       map == "all" ? "all maps" : map.charAt(0).toUpperCase() + map.slice(1);
     const sideString = side == "all" ? "both sides" : side;
 
-    await interaction.reply({
-      content: `Valorant lineups for ${agentString} on ${mapString} ${sideString}:\n${linkString}`,
-      embeds: [],
-    });
+    await interaction.reply(
+      `Valorant lineups for ${agentString} on ${mapString} ${sideString}:\n${linkString}`
+    );
   },
 };
