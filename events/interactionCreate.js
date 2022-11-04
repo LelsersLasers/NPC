@@ -16,9 +16,7 @@ module.exports = {
     console.log("Command found:", command);
 
     if (!command) {
-      console.error(
-        `No command matching ${interaction.commandName} was found.`
-      );
+      console.error(`No command matching ${interaction.commandName} was found.`);
       return;
     }
 

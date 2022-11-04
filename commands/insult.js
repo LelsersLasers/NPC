@@ -4,12 +4,8 @@ const fs = require("fs");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("insult")
-    .setDescription(
-      "Generates an insult or insults someone (format: /insult [user])"
-    )
-    .addUserOption((option) =>
-      option.setName("user").setDescription("User to insult")
-    ),
+    .setDescription("Generates an insult or insults someone (format: /insult [user])")
+    .addUserOption((option) => option.setName("user").setDescription("User to insult")),
   async execute(interaction) {
     console.log("\n'/insult' command executed");
 

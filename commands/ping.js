@@ -7,10 +7,7 @@ module.exports = {
       "Pings someone to get their attention (format: /ping [user] [times] [interval] [message])"
     )
     .addUserOption((option) =>
-      option
-        .setName("user")
-        .setDescription("The user to ping")
-        .setRequired(true)
+      option.setName("user").setDescription("The user to ping").setRequired(true)
     )
     .addIntegerOption((option) =>
       option

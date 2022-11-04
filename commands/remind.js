@@ -49,11 +49,7 @@ module.exports = {
       604800: "weeks",
     };
     let successMessage =
-      "Reminder set for " +
-      time +
-      " " +
-      unitStrings[unitModifier] +
-      " from now";
+      "Reminder set for " + time + " " + unitStrings[unitModifier] + " from now";
     if (message == defaultMessage) {
       successMessage += ".";
     } else {

@@ -66,7 +66,7 @@ module.exports = {
 
     const agent = interaction.options.getString("agent");
     const map = interaction.options.getString("map");
-    const side = interaction.options.getString("side") ?? "both";
+    const side = interaction.options.getString("side") ?? "all";
 
     const linkString = `<https://tracker.gg/valorant/guides/clips?agent=${agent}&map=${map}&objective=${side}&sort=score>`;
 
