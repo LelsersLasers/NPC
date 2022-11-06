@@ -77,7 +77,7 @@ module.exports = {
     const sideString = side == "all" ? "both sides" : side;
 
     await interaction.reply(
-      `Valorant lineups for ${agentString} on ${mapString} ${sideString}:\n${linkString}`
+      `Valorant lineups for ${agentString} on ${mapString} (${sideString}):\n${linkString}`
     );
   },
 };

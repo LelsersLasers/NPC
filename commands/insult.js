@@ -24,21 +24,26 @@ module.exports = {
     await interaction.deferReply();
     try {
       const colorsData = fs.readFileSync("./words/colors.txt", "utf8");
+      const animalsData = fs.readFileSync("./words/animals.txt", "utf8");
       const nounsData = fs.readFileSync("./words/nouns.txt", "utf8");
       const adjectivesData = fs.readFileSync("./words/adjectives.txt", "utf8");
 
       const colors = dataToList(colorsData);
-      const nouns = dataToList(nounsData);
+      const animals = dataToList(animalsData);
+      const nouns = dataToList(nounsData).filter(
+        (noun) => !animals.includes(noun)
+      );
       const adjectives = dataToList(adjectivesData).filter(
         (adjective) => !colors.includes(adjective)
       );
 
       const color = randomWord(colors);
+      const animal = randomWord(animals);
       const noun = randomWord(nouns);
       const adjective = randomWord(adjectives);
-      console.log({ color, adjective, noun });
+      console.log({ color, animal, adjective, noun });
 
-      const insult = color + " " + adjective + " " + noun;
+      const insult = adjective + " " + color + " " + animal + " " + noun;
 
       if (user) {
         await interaction.editReply(user.toString() + ", you " + insult + "!");
