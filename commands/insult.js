@@ -42,7 +42,7 @@ module.exports = {
       const lines = data.split("\n");
       let columns = { first: [], second: [], third: [] };
       for (const line of lines) {
-        const words = line.split("s").map((word) =>
+        const words = line.split(/\s+/).map((word) =>
           word
             .replace(/(\r\n|\n|\r)/gm, "")
             .trim()
@@ -109,6 +109,7 @@ module.exports = {
           userInsult = data.insult;
           break;
       }
+	  console.log({insult, userInsult}, "\n");
       if (user) {
         await interaction.editReply(user.toString() + ", " + userInsult);
       } else {
