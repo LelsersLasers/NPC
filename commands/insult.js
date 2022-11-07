@@ -67,25 +67,20 @@ module.exports = {
           const adverbsData = fs.readFileSync("./words/adverbs.txt", "utf8");
           const gerundsData = fs.readFileSync("./words/gerunds.txt", "utf8");
           const colorsData = fs.readFileSync("./words/colors.txt", "utf8");
-          const adjectivesData = fs.readFileSync("./words/adjectives.txt", "utf8");
           const animalsData = fs.readFileSync("./words/animals.txt", "utf8");
 
           const adverbs = dataToList(adverbsData);
           const gerunds = dataToList(gerundsData);
           const colors = dataToList(colorsData);
-          const adjectives = dataToList(adjectivesData).filter(
-            (adjective) => !colors.includes(adjective)
-          );
           const animals = dataToList(animalsData);
 
           const adverb = randomWord(adverbs);
           const gerund = randomWord(gerunds);
-          const adjective = randomWord(adjectives);
           const color = randomWord(colors);
           const animal = randomWord(animals);
-          console.log({ adverb, gerund, adjective, color, animal });
+          console.log({ adverb, gerund, color, animal });
 
-          insult = `${adverb} ${gerund} ${adjective} ${color} ${animal}`;
+          insult = `${adverb} ${gerund} ${color} ${animal}`;
           userInsult = `you ${insult}!`;
           break;
         case "shakespearean":
