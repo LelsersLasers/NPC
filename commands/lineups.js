@@ -4,7 +4,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("lineups")
     .setDescription(
-      "Searches for Valorant lineups for a agent/map/side! (format: /lineup [agent] [map] [side])"
+      "Searches for Valorant lineups for a agent/map/side (format: /lineup [agent] [map] <side>)"
     )
     .addStringOption((option) =>
       option

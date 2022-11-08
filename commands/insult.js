@@ -1,12 +1,12 @@
 const { SlashCommandBuilder } = require("discord.js");
 const fs = require("fs");
-const axios = require('axios');
+const axios = require("axios");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("insult")
     .setDescription(
-      "Generates an insult or insults someone (format: /insult [engine] [user])"
+      "Generates an insult or insults someone (format: /insult <engine> <user>)"
     )
     .addStringOption((option) =>
       option
@@ -95,16 +95,16 @@ module.exports = {
           userInsult = `thou ${insult}!`;
           break;
         case "evil":
-          const data = await axios.get(
-            "https://evilinsult.com/generate_insult.php?lang=en&type=json"
-          ).then((response) => response.data);
+          const data = await axios
+            .get("https://evilinsult.com/generate_insult.php?lang=en&type=json")
+            .then((response) => response.data);
           console.log(data);
 
           insult = "\n" + data.insult;
           userInsult = data.insult;
           break;
       }
-	  console.log({insult, userInsult}, "\n");
+      console.log({ insult, userInsult }, "\n");
       if (user) {
         await interaction.editReply(user.toString() + ", " + userInsult);
       } else {

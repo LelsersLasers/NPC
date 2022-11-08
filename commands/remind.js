@@ -4,7 +4,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("remind")
     .setDescription(
-      "Reminds you of something! (format: /remind [time] [unit] [message])"
+      "Reminds you of something (format: /remind [time] [unit] <message>)"
     )
     .addNumberOption((option) =>
       option

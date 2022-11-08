@@ -4,7 +4,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("ping")
     .setDescription(
-      "Pings someone to get their attention (format: /ping [user] [times] [interval] [message])"
+      "Pings someone to get their attention (format: /ping [user] <times> <interval> <message>)"
     )
     .addUserOption((option) =>
       option.setName("user").setDescription("The user to ping").setRequired(true)
