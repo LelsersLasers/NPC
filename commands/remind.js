@@ -4,7 +4,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("remind")
     .setDescription(
-      "Reminds you of something (format: /remind [time] [unit] <message>)"
+      "Reminds you of something (format: /remind [time] [unit] <user> <message>)"
     )
     .addNumberOption((option) =>
       option
@@ -25,6 +25,7 @@ module.exports = {
           { name: "weeks", value: 604800 }
         )
     )
+    .addUserOption((option) => option.setName("user").setDescription("Tags the user when the reminder is sent"))
     .addStringOption((option) =>
       option.setName("message").setDescription("The message to remind you of")
     ),
@@ -33,6 +34,8 @@ module.exports = {
 
     const time = interaction.options.getNumber("time");
     const unitModifier = interaction.options.getInteger("unit");
+
+    const user = interaction.options.getUser("user");
 
     const defaultMessage = "You asked me to remind you of something!";
     const message = interaction.options.getString("message") ?? defaultMessage;
@@ -72,9 +75,14 @@ module.exports = {
       if (dateString != nowDateString) {
         timeString += " on " + dateString.substring(0, 10);
       }
+      
+      let bonusString = "";
+      if (user) {
+        bonusString = " to " + user.toString();
+      }
 
       await interaction.channel.send(
-        "**REMINDER** (from " + timeString + "):\n*" + message + "*"
+        "**REMINDER**" + bonusString + " (from " + timeString + "):\n*" + message + "*"
       );
     }
 

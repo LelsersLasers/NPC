@@ -4,7 +4,7 @@ const helpString = `Available commands:
 /help - displays this message
 /test - tests to see if NPC is connected
 /ping - pings someone to get their attention (format: /ping [user] <times> <interval> <message>)
-/remind - reminds you of something (format: /remind [time] [unit] <message>)
+/remind - reminds you of something (format: /remind [time] [unit] <user> <message>)
 /lineups - searches for Valorant lineups for a agent/map/side (format: /lineup [agent] [map] <side>)
 /insult - generates an insult or insults someone (format: /insult <engine> <user>)`;
 
