@@ -14,6 +14,7 @@ module.exports = {
         .setDescription("The engine to use for the insult")
         .addChoices(
           { name: "formula", value: "formula" }, // default
+          { name: "alliteration", value: "alliteration" },
           { name: "shakespearean", value: "shakespearean" },
           { name: "evil", value: "evil" }
         )
@@ -55,6 +56,27 @@ module.exports = {
       return columns;
     }
 
+    function generate_formula_insult() {
+      const adverbsData = fs.readFileSync("./words/adverbs.txt", "utf8");
+      const gerundsData = fs.readFileSync("./words/gerunds.txt", "utf8");
+      const colorsData = fs.readFileSync("./words/colors.txt", "utf8");
+      const animalsData = fs.readFileSync("./words/animals.txt", "utf8");
+
+      const adverbs = dataToList(adverbsData);
+      const gerunds = dataToList(gerundsData);
+      const colors = dataToList(colorsData);
+      const animals = dataToList(animalsData);
+
+      const adverb = randomWord(adverbs);
+      const gerund = randomWord(gerunds);
+      const color = randomWord(colors);
+      const animal = randomWord(animals);
+      console.log({ adverb, gerund, color, animal });
+
+      return { adverb, gerund, color, animal };
+    }
+
+
     const engine = interaction.options.getString("engine") ?? "formula";
     const user = interaction.options.getUser("user");
     console.log({ engine, user });
@@ -64,24 +86,20 @@ module.exports = {
     try {
       switch (engine) {
         case "formula":
-          const adverbsData = fs.readFileSync("./words/adverbs.txt", "utf8");
-          const gerundsData = fs.readFileSync("./words/gerunds.txt", "utf8");
-          const colorsData = fs.readFileSync("./words/colors.txt", "utf8");
-          const animalsData = fs.readFileSync("./words/animals.txt", "utf8");
-
-          const adverbs = dataToList(adverbsData);
-          const gerunds = dataToList(gerundsData);
-          const colors = dataToList(colorsData);
-          const animals = dataToList(animalsData);
-
-          const adverb = randomWord(adverbs);
-          const gerund = randomWord(gerunds);
-          const color = randomWord(colors);
-          const animal = randomWord(animals);
-          console.log({ adverb, gerund, color, animal });
+          const { adverb, gerund, color, animal } = generate_formula_insult();
 
           insult = `${adverb} ${gerund} ${color} ${animal}`;
           userInsult = `you ${insult}!`;
+          break;
+        case "alliteration":
+          while (true) {
+            const { adverb, gerund, color, animal } = generate_formula_insult();
+            if (adverb[0] == gerund[0] && gerund[0] == color[0] && color[0] == animal[0]) {
+              insult = `${adverb} ${gerund} ${color} ${animal}`;
+              userInsult = `you ${insult}!`;
+              break;
+            }
+          }
           break;
         case "shakespearean":
           const columns = readShakespeareanInsults("./words/shakespeare.txt");
