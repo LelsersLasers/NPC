@@ -4,7 +4,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("league")
     .setDescription(
-      "League builds or counters (format: /league [champion] <type> <role> <opponent>)"
+      "League builds or counters (format: /league <champion> <type> <role> <opponent>)"
     )
     .addStringOption((option) =>
       option
@@ -40,12 +40,16 @@ module.exports = {
   async execute(interaction) {
     console.log("\n'/league' command executed\n");
 
-    const champion = (interaction.options.getString("champion") ?? "").replace(/\s/g, "");
+    function removeAllNonLetters(str) {
+        return str.replace(/[^a-zA-Z]/g, "");
+    }
+
+    const champion = removeAllNonLetters(interaction.options.getString("champion") ?? "");
     const type = interaction.options.getString("type") ?? "build";
     const role = interaction.options.getString("role") ?? "";
-    const opponent = (interaction.options.getString("opponent") ?? "").replace(/\s/g, "");
+    const opponent = removeAllNonLetters(interaction.options.getString("opponent") ?? "");
 
-    const noChampionLink = `<https://u.gg/lol/champions>`;
+    const noChampionLink = `<https://u.gg/lol/tier-list>`;
     if (champion == "") {
         await interaction.reply(`League builds:\n${noChampionLink}`);
         return;
@@ -65,18 +69,18 @@ module.exports = {
     }
 
 
-    let output = `League `;
+    let output = "";
     if (type == "build") {
-        output += `builds for `;
+        output += `Builds for `;
         if (role != "") {
             output += `${role} `;
         }
         output += `${champion}`;
         if (opponent != "") {
-            output += ` against ${opponent}`;
+            output += ` vs ${opponent}`;
         }
     } else {
-        output += `counters for ${champion}`;
+        output += `Counters for ${champion}`;
     }
     output += `:\n${linkString}`;
 
