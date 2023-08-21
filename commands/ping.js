@@ -14,6 +14,7 @@ module.exports = {
         .setName("times")
         .setDescription("The amount of times to ping the user (default 3)")
         .setMinValue(1)
+        .setMaxValue(5)
     )
     .addNumberOption((option) =>
       option
