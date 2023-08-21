@@ -4,7 +4,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("league")
     .setDescription(
-      "Searches for League builds for a champion/role or counters (format: /league [champion] <type> <role> <opponent>)"
+      "League builds or counters (format: /league [champion] <type> <role> <opponent>)"
     )
     .addStringOption((option) =>
       option
