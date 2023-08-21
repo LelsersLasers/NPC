@@ -6,6 +6,7 @@ const helpString = `Available commands:
 /ping - pings someone to get their attention (format: /ping [user] <times> <interval> <message>)
 /remind - reminds you of something (format: /remind [time] [unit] <user> <message>)
 /lineups - searches for Valorant lineups for a agent/map/side (format: /lineup [agent] [map] <side>)
+/league - searches for League builds for a champion/role or counters (format: /league [champion] <type> <role> <opponent>)
 /insult - generates an insult or insults someone (format: /insult <engine> <user>)`;
 
 module.exports = {
