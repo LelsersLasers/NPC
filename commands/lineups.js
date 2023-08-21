@@ -16,7 +16,9 @@ module.exports = {
           { name: "Breach", value: "breach" },
           { name: "Brimstone", value: "brimstone" },
           { name: "Chamber", value: "chamber" },
+          { name: "Deadlock", value: "deadlock" },
           { name: "Fade", value: "fade" },
+          { name: "Gekko", value: "gekko" },
           { name: "Harbor", value: "harbor" },
           { name: "Jett", value: "jett" },
           { name: "KAY/O", value: "kayo" },
@@ -46,6 +48,7 @@ module.exports = {
           { name: "Fracture", value: "fracture" },
           { name: "Haven", value: "haven" },
           { name: "Icebox", value: "icebox" },
+          { name: "Lotus", value: "lotus" },
           { name: "Pearl", value: "pearl" },
           { name: "Split", value: "split" },
           { name: "all maps", value: "all" }
