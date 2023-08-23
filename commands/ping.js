@@ -58,7 +58,7 @@ module.exports = {
 
     async function ping(timesLeft) {
       if (timesLeft > 0) {
-        await interaction.channel.send(messageString);
+        await interaction.followUp(messageString);
         setTimeout(() => ping(timesLeft - 1), intervalMs);
       }
     }
