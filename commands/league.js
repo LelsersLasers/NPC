@@ -72,7 +72,7 @@ module.exports = {
 
     let linkString = "";
     if (engine == "u.gg") {
-        const linkStringBase = `<https://u.gg/lol/champions/${champion}/${type}>`;
+        const linkStringBase = `<https://u.gg/lol/champions/${champion}/${type}`;
         linkString = linkStringBase;
 
         if (type == "build") {
@@ -83,8 +83,9 @@ module.exports = {
                 linkString += `?opp=${opponent}`;
             }
         }
+        linkString += `>`;
     } else {
-        const linkStringBase = `<https://www.leagueofgraphs.com/champions/${type}s/${champion}>`;
+        const linkStringBase = `<https://www.leagueofgraphs.com/champions/${type}s/${champion}`;
         linkString = linkStringBase;
 
         if (type == "build") {
@@ -95,6 +96,7 @@ module.exports = {
                 linkString += `/${opponent}`;
             }
         }
+        linkString += `>`;
     }
 
 
