@@ -19,6 +19,11 @@ module.exports = {
           { name: "evil", value: "evil" }
         )
     )
+    .addStringOption((option) =>
+      option
+        .setName("pattern")
+        .setDescription("av: adverb, g: gerund, c: color (default: av g c a) (only relevant if engine=formula/alliteration)")
+    )
     .addUserOption((option) => option.setName("user").setDescription("User to insult")),
   async execute(interaction) {
     console.log("\n'/insult' command executed");
@@ -38,6 +43,13 @@ module.exports = {
     function randomWord(lst) {
       return lst[Math.floor(Math.random() * lst.length)];
     }
+    function randomWordNotIn(lst, notIn) {
+        let word = randomWord(lst);
+        if (notIn.includes(word)) {
+            return randomWordNotIn(lst, notIn);
+        }
+        return word;
+    }
     function readShakespeareanInsults(path) {
       const data = fs.readFileSync(path, "utf8");
       const lines = data.split("\n");
@@ -56,7 +68,7 @@ module.exports = {
       return columns;
     }
 
-    function generate_formula_insult() {
+    function generate_formula_insult(pattern) {
       const adverbsData = fs.readFileSync("./words/adverbs.txt", "utf8");
       const gerundsData = fs.readFileSync("./words/gerunds.txt", "utf8");
       const colorsData = fs.readFileSync("./words/colors.txt", "utf8");
@@ -67,17 +79,27 @@ module.exports = {
       const colors = dataToList(colorsData);
       const animals = dataToList(animalsData);
 
-      const adverb = randomWord(adverbs);
-      const gerund = randomWord(gerunds);
-      const color = randomWord(colors);
-      const animal = randomWord(animals);
-      console.log({ adverb, gerund, color, animal });
+      const insult_words = [];
 
-      return { adverb, gerund, color, animal };
+      pattern = pattern.split(" ").filter((type) => ["av", "g", "c", "a"].includes(type));
+      if (pattern.length == 0) {
+        pattern = ["av", "g", "c", "a"];
+      }
+      for (const type of pattern) {
+        switch (type) {
+          case "av": insult_words.push(randomWordNotIn(adverbs, insult_words)); break;
+          case "g": insult_words.push(randomWordNotIn(gerunds, insult_words)); break;
+          case "c": insult_words.push(randomWordNotIn(colors, insult_words)); break;
+          case "a": insult_words.push(randomWordNotIn(animals, insult_words)); break;
+        }
+      }
+
+      return insult_words;
     }
 
 
     const engine = interaction.options.getString("engine") ?? "formula";
+    const pattern = interaction.options.getString("pattern") ?? "av g c a";
     const user = interaction.options.getUser("user");
     console.log({ engine, user });
     let insult = "";
@@ -86,16 +108,17 @@ module.exports = {
     try {
       switch (engine) {
         case "formula":
-          const { adverb, gerund, color, animal } = generate_formula_insult();
+          const insult_words = generate_formula_insult(pattern);
+          insult = insult_words.join(" ");
 
-          insult = `${adverb} ${gerund} ${color} ${animal}`;
           userInsult = `you ${insult}!`;
           break;
         case "alliteration":
           while (true) {
-            const { adverb, gerund, color, animal } = generate_formula_insult();
-            if (adverb[0] == gerund[0] && gerund[0] == color[0] && color[0] == animal[0]) {
-              insult = `${adverb} ${gerund} ${color} ${animal}`;
+            const insult_words = generate_formula_insult(pattern);
+            const letter = insult_words[0][0];
+            if (insult_words.every((word) => word[0] == letter)) {
+              insult = insult_words.join(" ");
               userInsult = `you ${insult}!`;
               break;
             }
