@@ -7,7 +7,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("llm")
     .setDescription(
-      `Chat with ${model} No history is stored, and the bot will not remember anything you say.`
+      `Chat with ${model} No history is stored / the bot will not remember anything you say.`
     )
     .addStringOption((option) =>
       option
@@ -28,12 +28,12 @@ module.exports = {
       stream: true
     });
 
-    const text = "";
+    let text = "";
     for await (const part of response) {
       text += part.message.content;
-      interaction.editReply(text);
+      await interaction.editReply(text);
       console.log({ text });
     }
-    // await interaction.editReply(response.message.content);
+    cons
   },
 };
