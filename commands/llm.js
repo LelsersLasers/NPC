@@ -34,6 +34,8 @@ module.exports = {
       await interaction.editReply(text);
       console.log({ text });
     }
-    cons
+    text += "\n(End)";
+    await interaction.editReply(text);
+    console.log("End of '/llm' command");
   },
 };
