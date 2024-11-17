@@ -24,10 +24,16 @@ module.exports = {
     const ollama = new Ollama.Ollama({ host: 'http://64.98.192.13:11434' });
     const response = await ollama.chat({
       model: model,
-      messages: [{ role: 'user', content: prompt }]
+      messages: [{ role: 'user', content: prompt }],
+      stream: true
     });
 
-    console.log({ response });
-    await interaction.editReply(response.message.content);
+    const text = "";
+    for await (const part of response) {
+      text += part.message.content;
+      interaction.editReply(text);
+      console.log({ text });
+    }
+    // await interaction.editReply(response.message.content);
   },
 };
