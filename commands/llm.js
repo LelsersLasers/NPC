@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require("discord.js");
 const Ollama = require('ollama');
 
-const model = "gemma2:2b";
+const model = "gwen2.5:0.5b";
 
 module.exports = {
   data: new SlashCommandBuilder()
