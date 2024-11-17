@@ -21,7 +21,7 @@ module.exports = {
 
     const prompt = interaction.options.getString("prompt");
 
-    const ollama = new Ollama({ host: 'http://64.98.192.13:11434' });
+    const ollama = new Ollama.Ollama({ host: 'http://64.98.192.13:11434' });
     const response = await ollama.chat({
       model: model,
       messages: [{ role: 'user', content: prompt }]
